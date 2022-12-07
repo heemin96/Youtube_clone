@@ -14,11 +14,10 @@ function Videos() {
     isLoading,
     error,
     data: videos,
-  } = useQuery(["videos", keyword], () => youtube.search(keyword));
+  } = useQuery(["videos", keyword], () => youtube.search(keyword)); //2번째 인자로 함수 받음 (Axios)
 
   return (
     <>
-      <div>Videos {keyword ? `🔍${keyword}` : "🔥"}</div>
       {isLoading && <p>Loading...</p>}
       {error && <p>Something is wrong 😖</p>}
       {videos && (

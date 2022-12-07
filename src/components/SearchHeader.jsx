@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { BsYoutube, BsSearch } from "react-icons/bs";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
+import { BsYoutube, BsSearch } from "react-icons/bs";
 
 function SearchHeader() {
   const { keyword } = useParams();
@@ -64,22 +64,27 @@ const SearchForm = styled.form`
   display: flex;
   width: 100%;
   justify-content: center;
+  boder-radius: 10rem;
 `;
 
 const SearchInput = styled.input.attrs((props) => ({
   type: "text",
   placeholder: "Search...",
 }))`
-  width: 50%;
+  width: 60%;
   color: black;
   padding: 0.5rem;
   outline: none;
+  border-radius: 0.7rem;
+  font-size: 1rem;
 `;
 
 const SearchButton = styled.button`
   padding-left: 1rem;
   padding-right: 1rem;
-  background-color: rgb(82 82 91);
+  background-color: transparent;
+  border-radius: 0.7rem;
+  border-none;
 `;
 
 export default SearchHeader;
