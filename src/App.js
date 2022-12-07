@@ -9,22 +9,21 @@ const queryClient = new QueryClient();
 
 function App() {
   return (
-    <div
-      style={{
-        maxWidth: "100%",
-        margin: "0 auto",
-        padding: "0 auto",
-        overflowX: "hidden",
-      }}
-    >
+    <Container>
       <SearchHeader />
       <YoutubeApiProvider>
         <QueryClientProvider client={queryClient}>
           <Outlet />
         </QueryClientProvider>
       </YoutubeApiProvider>
-    </div>
+    </Container>
   );
 }
+
+const Container = styled.div`
+  max-width:90%;
+  margin: 0 auto;
+  padding: 0; auto;
+`;
 
 export default App;

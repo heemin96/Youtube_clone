@@ -5,6 +5,7 @@ import VideoCard from "../components/VideoCard";
 import Youtube, { search } from "../api/youtube";
 import FakeYoutube from "../api/fakeYotubeClient";
 import { useYoutubeApi } from "../context/YoutubeApiContext";
+import styled from "styled-components";
 
 function Videos() {
   const { keyword } = useParams();
@@ -21,14 +22,36 @@ function Videos() {
       {isLoading && <p>Loading...</p>}
       {error && <p>Something is wrong 😖</p>}
       {videos && (
-        <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-2 gap-y-4">
+        <GridContainer>
           {videos.map((video) => (
             <VideoCard key={video.id} video={video} />
           ))}
-        </ul>
+        </GridContainer>
       )}
     </>
   );
 }
+const GridContainer = styled.ul`
+  display: Grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.5rem;
+  row-gap: 1rem;
+
+  @media (max-width: 1280px) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (max-width: 640px) {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+`;
 
 export default Videos;

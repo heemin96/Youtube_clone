@@ -12,22 +12,17 @@ function SearchHeader() {
     navigate(`/videos/${text}`);
   };
 
+  //serch 초기화
   useEffect(() => setText(keyword || ""), [keyword]);
 
   return (
     <Header>
       <LinkSection to="/">
         <YoutubeLogo />
-        <YoutubeTitle>Youtube</YoutubeTitle>
+        <YoutubeTitle>Premium</YoutubeTitle>
       </LinkSection>
       <SearchForm onSubmit={handleSubmit}>
-        <input
-          className="w-7/12 p-2 outline-none bg-black text-gray-50"
-          type="text"
-          placeholder="Search..."
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-        />
+        <SearchInput value={text} onChange={(e) => setText(e.target.value)} />
         <SearchButton>
           <BsSearch />
         </SearchButton>
@@ -48,25 +43,37 @@ const Header = styled.div`
 const LinkSection = styled(Link)`
   display: flex;
   align-items: center;
+  margin-right: 1rem;
 `;
 
 const YoutubeTitle = styled.h1`
-  font-weight: bold;
+  font-weight: 500;
   margin-left: 0.5rem;
   font-size: 1.875rem;
-  line-height: 2.25rem;
+  letter-spacing: -0.1rem;
 `;
 
 const YoutubeLogo = styled(BsYoutube)`
   font-size: 2.25rem;
   line-height: 2.5rem;
   color: red;
+  margin-top: 0.2rem;
 `;
 
 const SearchForm = styled.form`
   display: flex;
   width: 100%;
   justify-content: center;
+`;
+
+const SearchInput = styled.input.attrs((props) => ({
+  type: "text",
+  placeholder: "Search...",
+}))`
+  width: 50%;
+  color: black;
+  padding: 0.5rem;
+  outline: none;
 `;
 
 const SearchButton = styled.button`
