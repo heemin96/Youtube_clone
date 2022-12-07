@@ -9,8 +9,8 @@ const ChannelInfo = ({ id, name }) => {
   );
   return (
     <div className="flex my-4 mb-8 items-center">
-      {url && <img src={url} alt={name} />}
-      <p className="text-lg font-medium">{name}</p>
+      {url && <img className='w-10 h-10 rounded-full' src={url} alt={name} />}
+      <p className="text-lg font-medium ml-2">{name}</p>
     </div>
   );
 };

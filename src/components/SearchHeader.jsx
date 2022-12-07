@@ -19,7 +19,7 @@ function SearchHeader() {
     <Header>
       <LinkSection to="/">
         <YoutubeLogo />
-        <YoutubeTitle>Premium</YoutubeTitle>
+        <YoutubeTitle >Premium</YoutubeTitle>
       </LinkSection>
       <SearchForm onSubmit={handleSubmit}>
         <SearchInput value={text} onChange={(e) => setText(e.target.value)} />
