@@ -49,18 +49,17 @@
   
 ### 기능 1
 - Grid를 통한 반응형 웹페이지
+- 스크롤바 변경
 
 ### 기능 2
-
 - React Query를 통해 데이터 관리하기
-
+- React Axios 를 통해 데이터 통신하기
 
 ### 기능 3
-- React-Router-Dom 을 통해 검색하기 
-
-
+- React-Router-Dom 을 통해  검색하기 
 
 ### 기능 4
+- 실제 Api, 목데이터 나눠서 필요할때만  api 사용하기   
 
 
 
