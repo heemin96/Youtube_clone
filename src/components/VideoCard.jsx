@@ -1,31 +1,52 @@
-import React from 'react';
-import { formatAgo } from '../util/data';
-import { useNavigate } from 'react-router-dom';
-import koLocale from "timeago.js/lib/lang/ko";
+import React from "react";
+import { formatAgo } from "../util/date";
+import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 
-
-export default function VideoCard({ video, type }) {
+function VideoCard({ video, type }) {
   const { title, thumbnails, channelTitle, publishedAt } = video.snippet;
   const navigate = useNavigate();
-  const isList = type === 'list';
   return (
     <li
-      className={isList ? 'flex gap-1 m-2' : ''}
       onClick={() => {
-        navigate(`/videos/watch/${video.id}`, { state: { video } });
+        navigate(`/videos/watch/${video.id}`, { state: { video: video } }); // 두번재 인자는 부가적인 객체
       }}
     >
       <img
-        className={isList ? 'w-52 mr-2' : 'w-full'}
+        style={{ width: "100%", borderRadius: "1rem" }}
         src={thumbnails.medium.url}
         alt={title}
       />
+
       <div>
-        <p className='font-semibold my-2 line-clamp-2'>{title}</p>
-        <p className='text-sm opacity-80'>{channelTitle}</p>
-        <p className='text-sm opacity-80'>{formatAgo(publishedAt,"ko")}</p>
+        <Title> {title} </Title>
+        <ChannelTitile>{channelTitle}</ChannelTitile>
+        <FormatAgo>{formatAgo(publishedAt, "ko")}</FormatAgo>
       </div>
     </li>
   );
 }
 
+const Title = styled.p`
+  font-weight: 700;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+`;
+
+const ChannelTitile = styled.p`
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  opacity: 0.8;
+`;
+
+const FormatAgo = styled.p`
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  opacity: 0.8;
+`;
+
+export default VideoCard;

@@ -12,33 +12,67 @@ const VideoDetail = () => {
   const { title, channelId, channelTitle, description } = video.snippet;
 
   return (
-    <section className='flex flex-col lg:flex-row'>
-      <article className='basis-4/6'>
+    <VideoDetailPageSection>
+      {/* 메인비디오 article */}
+      <MainVideoArticle>
         <iframe
-          id='player'
-          type='text/html'
-          width='100%'
-          height='640'
+          id="player"
+          type="text/html"
+          width="100%"
+          height="640"
           src={`http://www.youtube.com/embed/${video.id}`}
-          frameBorder='0'
+          frameBorder="0"
+          title={title}
         />
-       <div className='p-8'>
-       <h2 className='text-xl font-bold'>{title}</h2>
+        <MainVideoContent>
+          <MainVideoTitle>{title}</MainVideoTitle>
           <ChannelInfo id={channelId} name={channelTitle} />
-          <pre className='whitespace-pre-wrap'>{description}</pre>
-        </div>
-      </article>
-      <section className="basis-2/6">
+          <MainVideoPre>{description}</MainVideoPre>
+        </MainVideoContent>
+      </MainVideoArticle>
+
+      {/* 관련영상 section */}
+      <RelatedVideosSection>
         <RelatedVideos id={video.id} />
-      </section>
-    </section>
+      </RelatedVideosSection>
+    </VideoDetailPageSection>
   );
 };
 
-// const Section = styled.section`
-//   display: flex;
-//   flex-direction: column;
+const VideoDetailPageSection = styled.section`
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
 
-  
-// `;
+  @media (max-width: 1024px) {
+    flex-direction: column;
+  }
+`;
+
+const MainVideoArticle = styled.article`
+  flex-basis: 66.66666%;
+`;
+
+const MainVideoContent = styled.div`
+  padding-top: 2rem;
+`;
+
+const MainVideoTitle = styled.div`
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 700;
+`;
+
+const MainVideoPre = styled.pre`
+  white-space: pre-wrap;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  padding: 1rem;
+  font-family: auto;
+`;
+
+const RelatedVideosSection = styled.section`
+  flex-basis: 33.333333%;
+`;
+
 export default VideoDetail;

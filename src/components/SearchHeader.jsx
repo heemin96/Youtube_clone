@@ -19,7 +19,7 @@ function SearchHeader() {
     <Header>
       <LinkSection to="/">
         <YoutubeLogo />
-        <YoutubeTitle >Premium</YoutubeTitle>
+        <YoutubeTitle>Premium</YoutubeTitle>
       </LinkSection>
       <SearchForm onSubmit={handleSubmit}>
         <SearchInput value={text} onChange={(e) => setText(e.target.value)} />
@@ -72,11 +72,12 @@ const SearchInput = styled.input.attrs((props) => ({
   placeholder: "Search...",
 }))`
   width: 60%;
-  color: black;
+  color: white;
   padding: 0.5rem;
   outline: none;
   border-radius: 0.7rem;
   font-size: 1rem;
+  background-color: black;
 `;
 
 const SearchButton = styled.button`

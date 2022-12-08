@@ -2,8 +2,6 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import VideoCard from "../components/VideoCard";
-import Youtube, { search } from "../api/youtube";
-import FakeYoutube from "../api/fakeYotubeClient";
 import { useYoutubeApi } from "../context/YoutubeApiContext";
 import styled from "styled-components";
 
@@ -14,7 +12,9 @@ function Videos() {
     isLoading,
     error,
     data: videos,
-  } = useQuery(["videos", keyword], () => youtube.search(keyword)); //2번째 인자로 함수 받음 (Axios)
+  } = useQuery(["videos", keyword], () => youtube.search(keyword), {
+    staleTime: 1000 * 60 * 1,
+  }); //2번째 인자로 함수 받음 (Axios)
 
   return (
     <>

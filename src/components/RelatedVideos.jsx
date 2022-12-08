@@ -1,8 +1,7 @@
 import React from "react";
-import styled from "styled-components";
 import { useQuery } from "@tanstack/react-query";
 import { useYoutubeApi } from "../context/YoutubeApiContext";
-import VideoCard from "./VideoCard";
+import RelatedVideosCard from "./RelatedVideosCard";
 
 const RelatedVideos = ({ id }) => {
   const { youtube } = useYoutubeApi();
@@ -10,7 +9,9 @@ const RelatedVideos = ({ id }) => {
     isLoading,
     error,
     data: videos,
-  } = useQuery(["related", id], () => youtube.relatedVideos(id));
+  } = useQuery(["related", id], () => youtube.relatedVideos(id), {
+    staleTime: 1000 * 60 * 5,
+  });
   return (
     <>
       {isLoading && <p>Loading...</p>}
@@ -18,13 +19,12 @@ const RelatedVideos = ({ id }) => {
       {videos && (
         <ul>
           {videos.map((video) => (
-            <VideoCard key={video.id} video={video} type='list'/>
+            <RelatedVideosCard key={video.id} video={video} />
           ))}
         </ul>
       )}
     </>
   );
 };
-
 
 export default RelatedVideos;
