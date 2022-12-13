@@ -54,4 +54,16 @@ export default class Youtube {
       })
       .then((res) => res.data.items);
   }
+
+  async #categories(id) {
+    return this.apiClient
+      .videos({
+        params: {
+          part: "snippet",
+          maxResults: 25,
+          chart: "categories",
+        },
+      })
+      .then((res) => res.data.items);
+  }
 }

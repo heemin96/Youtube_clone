@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { BsYoutube, BsSearch } from "react-icons/bs";
+import { AiOutlineMenu } from "react-icons/ai";
 
 function SearchHeader() {
   const { keyword } = useParams();
@@ -16,28 +17,45 @@ function SearchHeader() {
   useEffect(() => setText(keyword || ""), [keyword]);
 
   return (
-    <Header>
-      <LinkSection to="/">
-        <YoutubeLogo />
-        <YoutubeTitle>Premium</YoutubeTitle>
-      </LinkSection>
-      <SearchForm onSubmit={handleSubmit}>
-        <SearchInput value={text} onChange={(e) => setText(e.target.value)} />
-        <SearchButton>
-          <BsSearch />
-        </SearchButton>
-      </SearchForm>
-    </Header>
+    <>
+      <Header>
+        <Menubar />
+        <LinkSection to="/">
+          <YoutubeLogo />
+          <YoutubeTitle>
+            Premium
+            <YoutubeTitleCountry>KR.</YoutubeTitleCountry>
+          </YoutubeTitle>
+        </LinkSection>
+        <SearchForm onSubmit={handleSubmit}>
+          <SearchInput value={text} onChange={(e) => setText(e.target.value)} />
+          <SearchButton>
+            <BsSearch />
+          </SearchButton>
+        </SearchForm>
+      </Header>
+    </>
   );
 }
+
+const Menubar = styled(AiOutlineMenu)`
+  font-size: 1.7rem;
+  display: flex;
+  align-self: center;
+  margin-right: 3rem;
+  margin-left: 1.3rem;
+  margin-top: 0.1rem;
+  flex-shrink: 0;
+`;
 const Header = styled.div`
   font-size: 1.5rem;
   line-height: 2rem;
   display: flex;
-  width: 100%;
+  width: 100vw;
   padding: 1rem;
-  border-bottom: 1px solid gray;
-  margin-bottom: 1rem;
+  position: fixed;
+  background-color: rgb(24 24 27);
+  z-index: 1000;
 `;
 
 const LinkSection = styled(Link)`
@@ -48,9 +66,17 @@ const LinkSection = styled(Link)`
 
 const YoutubeTitle = styled.h1`
   font-weight: 500;
-  margin-left: 0.5rem;
+  margin-left: 0.2rem;
   font-size: 1.875rem;
   letter-spacing: -0.1rem;
+  display: flex;
+`;
+
+const YoutubeTitleCountry = styled.span`
+  font-size: 0.8rem;
+  margin-top: -0.8rem;
+  margin-left: 0.2rem;
+  color: gray;
 `;
 
 const YoutubeLogo = styled(BsYoutube)`

@@ -1,29 +1,32 @@
 import { Outlet } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import styled from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 
 import { YoutubeApiProvider } from "./context/YoutubeApiContext";
 import SearchHeader from "./components/SearchHeader";
-
+import { theme } from "./styles/theme";
 import "./styles/global.css";
+import Navbar from "./components/Navbar";
 
 const queryClient = new QueryClient();
 
 function App() {
   return (
-    <Container>
+    <ThemeProvider theme={theme}>
       <SearchHeader />
-      <YoutubeApiProvider>
-        <QueryClientProvider client={queryClient}>
-          <Outlet />
-        </QueryClientProvider>
-      </YoutubeApiProvider>
-    </Container>
+      <VideoContainer>
+        <YoutubeApiProvider>
+          <QueryClientProvider client={queryClient}>
+            <Outlet />
+          </QueryClientProvider>
+        </YoutubeApiProvider>
+      </VideoContainer>
+    </ThemeProvider>
   );
 }
 
-const Container = styled.div`
-  max-width:95%;
+const VideoContainer = styled.div`
+  max-width:100%;
   margin: 0 auto;
   padding: 0; auto;
 `;

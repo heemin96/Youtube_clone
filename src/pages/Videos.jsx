@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import VideoCard from "../components/VideoCard";
 import { useYoutubeApi } from "../context/YoutubeApiContext";
 import styled from "styled-components";
+import Navbar from "../components/Navbar";
 
 function Videos() {
   const { keyword } = useParams();
@@ -17,9 +18,11 @@ function Videos() {
   }); //2번째 인자로 함수 받음 (Axios)
 
   return (
-    <>
-      {isLoading && <p>Loading...</p>}
-      {error && <p>Something is wrong 😖</p>}
+    <div style={{ display: "flex" }}>
+      <Navbar />
+
+      {isLoading && <p>로딩중입니다...</p>}
+      {error && <p>통신 오류 입니다 😖</p>}
       {videos && (
         <GridContainer>
           {videos.map((video) => (
@@ -27,7 +30,7 @@ function Videos() {
           ))}
         </GridContainer>
       )}
-    </>
+    </div>
   );
 }
 const GridContainer = styled.ul`
@@ -35,20 +38,21 @@ const GridContainer = styled.ul`
   grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 0.5rem;
   row-gap: 1rem;
+  padding: 6rem 7rem;
 
-  @media (max-width: 1280px) {
+  ${({ theme }) => theme.device.xxl} {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
-  @media (max-width: 1024px) {
+  ${({ theme }) => theme.device.xl} {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  @media (max-width: 768px) {
+  ${({ theme }) => theme.device.lg} {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  @media (max-width: 640px) {
+  ${({ theme }) => theme.device.md} {
     grid-template-columns: repeat(1, minmax(0, 1fr));
   }
 `;
