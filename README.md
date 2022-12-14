@@ -36,10 +36,9 @@
 
 ## 기술 스택
 
-| JavaScript |  React   |  Node   |
-| :--------: | :------: | :-----: |
+| JavaScript |  React   |  Node   |  
+| :--------: | :------: | :-----: | 
 |   <img src="https://user-images.githubusercontent.com/101728625/205824814-ff390f33-e823-42f6-850d-eb906733f377.png">   | <img src="https://user-images.githubusercontent.com/101728625/205825066-16686d43-2f6b-4e8c-bd23-60afe900cd87.png"> | <img src="https://user-images.githubusercontent.com/101728625/205825143-b99d9b06-7ad1-4c37-879e-f51e3d5317e4.png"> |
-
 <br>
 
 ## 구현 기능
