@@ -43,25 +43,15 @@ export default class Youtube {
       );
   }
 
-  async #mostPopular() {
+  async #mostPopular(key) {
     return this.apiClient
       .videos({
         params: {
           part: "snippet",
           maxResults: 25,
           chart: "mostPopular",
-        },
-      })
-      .then((res) => res.data.items);
-  }
-
-  async #categories(id) {
-    return this.apiClient
-      .videos({
-        params: {
-          part: "snippet",
-          maxResults: 25,
-          chart: "categories",
+          regionCode: "kr",
+          videoCategoryId: key,
         },
       })
       .then((res) => res.data.items);

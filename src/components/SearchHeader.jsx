@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { BsYoutube, BsSearch } from "react-icons/bs";
 import { AiOutlineMenu } from "react-icons/ai";
+import Categories from "./Categories";
 
 function SearchHeader() {
   const { keyword } = useParams();
@@ -19,24 +20,46 @@ function SearchHeader() {
   return (
     <>
       <Header>
-        <Menubar />
-        <LinkSection to="/">
-          <YoutubeLogo />
-          <YoutubeTitle>
-            Premium
-            <YoutubeTitleCountry>KR.</YoutubeTitleCountry>
-          </YoutubeTitle>
-        </LinkSection>
-        <SearchForm onSubmit={handleSubmit}>
-          <SearchInput value={text} onChange={(e) => setText(e.target.value)} />
-          <SearchButton>
-            <BsSearch />
-          </SearchButton>
-        </SearchForm>
+        <TopSection>
+          <Menubar />
+          <LinkSection to="/">
+            <YoutubeLogo />
+            <YoutubeTitle>
+              Premium
+              <YoutubeTitleCountry>KR.</YoutubeTitleCountry>
+            </YoutubeTitle>
+          </LinkSection>
+          <SearchForm onSubmit={handleSubmit}>
+            <SearchInput
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+            />
+            <SearchButton>
+              <BsSearch />
+            </SearchButton>
+          </SearchForm>
+        </TopSection>
       </Header>
     </>
   );
 }
+
+const Header = styled.div`
+  font-size: 1.5rem;
+  line-height: 2rem;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  padding: 1rem;
+  position: fixed;
+  background-color: rgb(24 24 27);
+  z-index: 1000;
+`;
+
+const TopSection = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
 
 const Menubar = styled(AiOutlineMenu)`
   font-size: 1.7rem;
@@ -47,17 +70,6 @@ const Menubar = styled(AiOutlineMenu)`
   margin-top: 0.1rem;
   flex-shrink: 0;
 `;
-const Header = styled.div`
-  font-size: 1.5rem;
-  line-height: 2rem;
-  display: flex;
-  width: 100vw;
-  padding: 1rem;
-  position: fixed;
-  background-color: rgb(24 24 27);
-  z-index: 1000;
-`;
-
 const LinkSection = styled(Link)`
   display: flex;
   align-items: center;

@@ -56,8 +56,9 @@ const N = {
     background-color: rgb(24 24 27);
     position: fixed;
     top: 0;
-    margin-top: 6rem;
+    margin-top: 5.7rem;
     margin-left: 1.3rem;
+    z-index: 1000;
   `,
 
   Article: styled.div`
@@ -73,28 +74,27 @@ const N = {
 };
 
 const Home = styled(MdHomeFilled)`
-  font-size: 2rem;
+  font-size: 1.8rem;
 `;
 
 const Subscriptions = styled(MdSubscriptions)`
-  font-size: 2rem;
+  font-size: 1.5rem;
 `;
 
 const Original = styled(AiFillYoutube)`
-  font-size: 2rem;
+  font-size: 1.5rem;
 `;
 
 const Music = styled(SiYoutubemusic)`
-  font-size: 2rem;
+  font-size: 1.5rem;
 `;
 
 const Library = styled(MdOutlineVideoLibrary)`
-  font-size: 2rem;
+  font-size: 1.5rem;
 `;
 
 const Download = styled(TfiDownload)`
-  font-size: 2rem;
-  border-color: black;
+  font-size: 1.5rem;
 `;
 
 export default Navbar;

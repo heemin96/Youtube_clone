@@ -14,21 +14,16 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <SearchHeader />
-      <VideoContainer>
-        <YoutubeApiProvider>
-          <QueryClientProvider client={queryClient}>
-            <Outlet />
-          </QueryClientProvider>
-        </YoutubeApiProvider>
-      </VideoContainer>
+
+      <YoutubeApiProvider>
+        <QueryClientProvider client={queryClient}>
+          <Outlet />
+        </QueryClientProvider>
+      </YoutubeApiProvider>
     </ThemeProvider>
   );
 }
 
-const VideoContainer = styled.div`
-  max-width:100%;
-  margin: 0 auto;
-  padding: 0; auto;
-`;
+const VideoContainer = styled.div``;
 
 export default App;
