@@ -1,4 +1,4 @@
-const categoriesList = [
+const CategoriesList = [
   {
     key: "1",
     name: "전체",
@@ -50,4 +50,4 @@ const categoriesList = [
   },
 ];
 
-export default categoriesList;
+export default CategoriesList;

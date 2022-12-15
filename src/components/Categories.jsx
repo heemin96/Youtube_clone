@@ -1,22 +1,25 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import AppButton from "../components/AppButton.jsx";
-import categoriesList from "../util/List/CategoriesList.js";
+import React from "react";
+import styled, { css } from "styled-components";
+import CategoriesList from "../util/List/CategoriesList";
 
-function Categories({ onClick }) {
-  const [categoryItem, setCategoryItem] = useState(categoriesList[0]);
-
+const Categories = ({ category, onSelect }) => {
   return (
     <C.Section>
-      {categoriesList.map(({ key, name }) => (
-        <AppButton key={key} name={name} text={name}></AppButton>
+      {CategoriesList.map((c) => (
+        <C.Button
+          key={c.key}
+          active={category === c.key}
+          onClick={() => onSelect(c.key)}
+        >
+          {c.name}
+        </C.Button>
       ))}
     </C.Section>
   );
-}
+};
 
 const C = {
-  Section: styled.section`
+  Section: styled.div`
     background-color: rgb(24 24 27);
     position: fixed;
     margin-top: 4rem;
@@ -27,10 +30,28 @@ const C = {
     width: 100%;
     z-index: 1000;
     padding: 1rem;
+    max-width: 90vw;
+  `,
 
-    // ${({ theme }) => theme.device.xxl} {
-    //   display: none;
-    // }
+  Button: styled.button`
+    font-size: 1rem;
+    background-color: black;
+    padding: 0.5rem 1rem;
+    color: white;
+    border-radius: 0.5rem;
+    background-color: #282828;
+    width: max-content;
+    &:hover {
+      filter: brightness(1.3);
+    }
+
+    ${(props) =>
+      props.active &&
+      css`
+        font-weight: 600;
+        background-color: white;
+        color: black;
+      `}
   `,
 };
 export default Categories;

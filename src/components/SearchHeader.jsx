@@ -3,7 +3,6 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { BsYoutube, BsSearch } from "react-icons/bs";
 import { AiOutlineMenu } from "react-icons/ai";
-import Categories from "./Categories";
 
 function SearchHeader() {
   const { keyword } = useParams();

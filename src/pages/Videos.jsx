@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import VideoCard from "../components/VideoCard";
@@ -6,9 +6,8 @@ import { useYoutubeApi } from "../context/YoutubeApiContext";
 import styled from "styled-components";
 import Navbar from "../components/Navbar";
 import Categories from "../components/Categories";
-import categoriesList from "../util/List/CategoriesList";
 
-function Videos() {
+function Videos({ changeVideos }) {
   const { keyword } = useParams();
   const { youtube } = useYoutubeApi();
   const {
@@ -19,31 +18,23 @@ function Videos() {
     staleTime: 1000 * 60 * 1,
   }); //2번째 인자로 함수 받음 (Axios)
 
-  const [category, setCategory] = useState("1");
-
-  const changeCategory = () => {
-    const {
-      isLoading,
-      error,
-      data: videos,
-    } = useQuery(["videos", key], () => youtube.Categories(key), {});
-  };
-
   return (
-    <HomeContainer>
-      <Categories />
+    <>
       <Navbar />
-
       {isLoading && <p>로딩중입니다...</p>}
       {error && <p>통신 오류 입니다 😖</p>}
       {videos && (
         <GridContainer>
           {videos.map((video) => (
-            <VideoCard key={video.id} video={video} />
+            <VideoCard
+              key={video.id}
+              video={video}
+              changeVideos={changeVideos}
+            />
           ))}
         </GridContainer>
       )}
-    </HomeContainer>
+    </>
   );
 }
 

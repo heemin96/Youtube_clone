@@ -3,7 +3,8 @@ import { formatAgo } from "../util/date";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-function VideoCard({ video, type }) {
+function VideoCard({ video, type, changeVideos }) {
+  console.log("changevideo :" + changeVideos);
   const { title, thumbnails, channelTitle, publishedAt } = video.snippet;
   const navigate = useNavigate();
   return (

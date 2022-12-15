@@ -58,7 +58,7 @@ const N = {
     top: 0;
     margin-top: 5.7rem;
     margin-left: 1.3rem;
-    z-index: 1000;
+    z-index: 2000;
   `,
 
   Article: styled.div`

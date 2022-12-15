@@ -3,8 +3,9 @@ export default class Youtube {
     this.apiClient = apiClient;
   }
 
+  //검색어 있으면 검색 페이지 아니면 mostPopular 페이지.
   async search(keyword) {
-    return keyword ? this.#searchByKeyword(keyword) : this.#mostPopular();
+    return keyword ? this.searchByKeyword(keyword) : this.mostPopular();
   }
 
   async channelImageURL(id) {
@@ -28,7 +29,7 @@ export default class Youtube {
       );
   }
 
-  async #searchByKeyword(keyword) {
+  async searchByKeyword(keyword) {
     return this.apiClient
       .search({
         params: {
@@ -43,7 +44,7 @@ export default class Youtube {
       );
   }
 
-  async #mostPopular(key) {
+  async mostPopular(key) {
     return this.apiClient
       .videos({
         params: {
