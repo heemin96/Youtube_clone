@@ -25,7 +25,7 @@ function Videos({ changeVideos }) {
       {error && <p>통신 오류 입니다 😖</p>}
       {videos && (
         <GridContainer>
-          {videos.map((video) => (
+          {changeVideos.map((video) => (
             <VideoCard
               key={video.id}
               video={video}

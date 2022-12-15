@@ -43,9 +43,9 @@ function Home() {
     fetchFromApi(
       `videos?part=snippet&chart=mostPopular&maxResults=25&regionCode=kr&videoCategoryId=${category}`
     ).then((data) => setChangeVideos(data.items));
-
-    console.log("changevidieos :" + setChangeVideos);
   }, [category]);
+
+  console.log("changevid", changeVideos);
 
   return (
     <HomeContainer>
