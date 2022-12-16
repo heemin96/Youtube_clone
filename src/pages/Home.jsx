@@ -49,44 +49,33 @@ function Home() {
 
   return (
     <HomeContainer>
-      <Categories
-        category={category}
-        setCategory={setCategory}
-        onSelect={onSelect}
-      />
-      <Videos changeVideos={changeVideos} />
+      <NavbarSection>
+        <Navbar />
+      </NavbarSection>
+
+      <VideoSection>
+        <Videos changeVideos={changeVideos} />
+      </VideoSection>
     </HomeContainer>
   );
 }
 
 const HomeContainer = styled.div`
-  display: flex;
-  flex-direction: column;
+  display: grid;
+
+  grid-template-columns: 10px auto;
+  grid-template-areas: //
+    "navbar content";
+
   background-color: rgb(24 24 27);
 `;
 
-const GridContainer = styled.ul`
-  display: Grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 0.5rem;
-  row-gap: 1rem;
-  padding: 9rem 3rem 0rem 7rem;
+const NavbarSection = styled.div`
+  grid-area: navbar;
+`;
 
-  ${({ theme }) => theme.device.xxl} {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
-  ${({ theme }) => theme.device.xl} {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  ${({ theme }) => theme.device.lg} {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  ${({ theme }) => theme.device.md} {
-    grid-template-columns: repeat(1, minmax(0, 1fr));
-  }
+const VideoSection = styled.div`
+  grid-area: content;
 `;
 
 export default Home;

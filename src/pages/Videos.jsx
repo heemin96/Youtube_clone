@@ -6,50 +6,55 @@ import { useYoutubeApi } from "../context/YoutubeApiContext";
 import styled from "styled-components";
 import Navbar from "../components/Navbar";
 import Categories from "../components/Categories";
+import { fetchFromApi } from "../api/fetchFromApi";
 
-function Videos({ changeVideos }) {
-  const { keyword } = useParams();
-  const { youtube } = useYoutubeApi();
-  const {
-    isLoading,
-    error,
-    data: videos,
-  } = useQuery(["videos", keyword], () => youtube.search(keyword), {
-    staleTime: 1000 * 60 * 1,
-  }); //2번째 인자로 함수 받음 (Axios)
+function Videos({}) {
+  const [category, setCategory] = useState("1");
+  const [changeVideos, setChangeVideos] = useState([]);
+
+  // onSelect: category값을 업데이트하는 함수
+  // 그리고 category와 onSelect함수를 props로 전달
+  // Categories.js에서 onSelect함수를 onClick으로 설정
+  const onSelect = useCallback((category) => setCategory(category), []);
+
+  /////////////////////////////////////////////////////////////////
+
+  useEffect(() => {
+    fetchFromApi(
+      `videos?part=snippet&chart=mostPopular&maxResults=25&regionCode=kr&videoCategoryId=${category}`
+    ).then((data) => setChangeVideos(data.items));
+  }, [category]);
 
   return (
-    <>
-      <Navbar />
-      {isLoading && <p>로딩중입니다...</p>}
-      {error && <p>통신 오류 입니다 😖</p>}
-      {videos && (
-        <GridContainer>
-          {changeVideos.map((video) => (
-            <VideoCard
-              key={video.id}
-              video={video}
-              changeVideos={changeVideos}
-            />
-          ))}
-        </GridContainer>
-      )}
-    </>
+    <FlexContainer>
+      <Categories
+        category={category}
+        setCategory={setCategory}
+        onSelect={onSelect}
+      />
+      <GridContainer>
+        {changeVideos.map((video) => (
+          <VideoCard key={video.id} video={video} changeVideos={changeVideos} />
+        ))}
+      </GridContainer>
+    </FlexContainer>
   );
 }
 
-const HomeContainer = styled.div`
+const FlexContainer = styled.div`
   display: flex;
+  padding: 2rem 3rem 0rem 6rem;
   flex-direction: column;
-  background-color: rgb(24 24 27);
+  align-items: center;
+  gap: 2rem;
 `;
 
 const GridContainer = styled.ul`
   display: Grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
+  gird-template-rows: 100px auto;
   gap: 0.5rem;
   row-gap: 1rem;
-  padding: 9rem 3rem 0rem 7rem;
 
   ${({ theme }) => theme.device.xxl} {
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -66,6 +71,14 @@ const GridContainer = styled.ul`
   ${({ theme }) => theme.device.md} {
     grid-template-columns: repeat(1, minmax(0, 1fr));
   }
+`;
+
+const CategorySection = styled.div`
+  grid-area: category;
+`;
+
+const VideoSection = styled.div`
+  grid-area: video;
 `;
 
 export default Videos;

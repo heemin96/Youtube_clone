@@ -1,5 +1,8 @@
 import React from "react";
 import styled, { css } from "styled-components";
+import ScrollContainer, { useScrollContainer } from "react-indiana-drag-scroll";
+
+import "react-indiana-drag-scroll/dist/style.css";
 import CategoriesList from "../util/List/CategoriesList";
 
 const Categories = ({ category, onSelect }) => {
@@ -20,17 +23,10 @@ const Categories = ({ category, onSelect }) => {
 
 const C = {
   Section: styled.div`
-    background-color: rgb(24 24 27);
-    position: fixed;
-    margin-top: 4rem;
     display: flex;
     gap: 1rem;
-    justify-content: center;
-    background-color: rgb(24 24 27);
-    width: 100%;
-    z-index: 1000;
-    padding: 1rem;
-    max-width: 90vw;
+    align-self: start;
+    flex-wrap: wrap;
   `,
 
   Button: styled.button`
