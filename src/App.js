@@ -16,15 +16,12 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <AppContext>
-        <div className="flex flex-col h-full">
-          <SearchHeader />
-
-          <YoutubeApiProvider>
-            <QueryClientProvider client={queryClient}>
-              <Outlet />
-            </QueryClientProvider>
-          </YoutubeApiProvider>
-        </div>
+        <SearchHeader />
+        <YoutubeApiProvider>
+          <QueryClientProvider client={queryClient}>
+            <Outlet />
+          </QueryClientProvider>
+        </YoutubeApiProvider>
       </AppContext>
     </ThemeProvider>
   );

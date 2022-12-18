@@ -1,12 +1,11 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import VideoCard from "../components/VideoCard";
-import { useYoutubeApi } from "../context/YoutubeApiContext";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
+
+import { fetchFromApi } from "../api/fetchFromApi";
+
+import VideoCard from "../components/VideoCard";
 import Navbar from "../components/Navbar";
 import Categories from "../components/Categories";
-import { fetchFromApi } from "../api/fetchFromApi";
 
 function Videos({}) {
   const [category, setCategory] = useState("1");
@@ -26,33 +25,47 @@ function Videos({}) {
   }, [category]);
 
   return (
-    <FlexContainer>
-      <Categories
-        category={category}
-        setCategory={setCategory}
-        onSelect={onSelect}
-      />
-      <GridContainer>
-        {changeVideos.map((video) => (
-          <VideoCard key={video.id} video={video} changeVideos={changeVideos} />
-        ))}
-      </GridContainer>
-    </FlexContainer>
+    <>
+      <Navbar />
+      <FlexContainer>
+        <Categories
+          category={category}
+          setCategory={setCategory}
+          onSelect={onSelect}
+        />
+        <GridContainer>
+          {changeVideos.map((video) => (
+            <VideoCard
+              key={video.id}
+              video={video}
+              changeVideos={changeVideos}
+            />
+          ))}
+        </GridContainer>
+      </FlexContainer>
+    </>
   );
 }
 
 const FlexContainer = styled.div`
-  display: flex;
+  // display: flex;
+  // flex-direction: column;
   padding: 2rem 3rem 0rem 6rem;
-  flex-direction: column;
-  align-items: center;
-  gap: 2rem;
+  overflow: scroll;
+  // width: calc(100% - 56px);
+  // flex-direction: column;
+  // align-items: center;
+  // gap: 2rem;
+
+  ${({ theme }) => theme.device.md} {
+    margin: 0;
+    padding: 2rem;
+  }
 `;
 
 const GridContainer = styled.ul`
   display: Grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  gird-template-rows: 100px auto;
   gap: 0.5rem;
   row-gap: 1rem;
 
@@ -71,14 +84,6 @@ const GridContainer = styled.ul`
   ${({ theme }) => theme.device.md} {
     grid-template-columns: repeat(1, minmax(0, 1fr));
   }
-`;
-
-const CategorySection = styled.div`
-  grid-area: category;
-`;
-
-const VideoSection = styled.div`
-  grid-area: video;
 `;
 
 export default Videos;

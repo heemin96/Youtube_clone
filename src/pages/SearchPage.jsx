@@ -1,12 +1,13 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import VideoCard from "../components/VideoCard";
-import { useYoutubeApi } from "../context/YoutubeApiContext";
+import React from "react";
+
 import styled from "styled-components";
+import { useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+
+import { useYoutubeApi } from "../context/YoutubeApiContext";
+
+import VideoCard from "../components/VideoCard";
 import Navbar from "../components/Navbar";
-import Categories from "../components/Categories";
-import { VscListFilter } from "react-icons/vsc";
 
 function SearchPage({ changeVideos }) {
   const { keyword } = useParams();
@@ -22,15 +23,10 @@ function SearchPage({ changeVideos }) {
   return (
     <>
       <Navbar />
-
       {isLoading && <p>로딩중입니다...</p>}
       {error && <p>통신 오류 입니다 😖</p>}
       {videos && (
         <FlexContainer>
-          <div style={{ display: "flex" }}>
-            <Filter /> <span>필터</span>
-          </div>
-
           <GridContainer>
             {videos.map((video) => (
               <VideoCard key={video.id} video={video} videos={changeVideos} />
@@ -45,14 +41,16 @@ function SearchPage({ changeVideos }) {
 const FlexContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: start;
-  padding: 3rem 3rem 0rem 7rem;
-`;
+  // width: calc(100% - 56px);
+  padding: 2rem 3rem 0rem 6rem;
+  // flex-direction: column;
+  // align-items: center;
+  // gap: 2rem;
 
-const HomeContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  background-color: rgb(24 24 27);
+  ${({ theme }) => theme.device.md} {
+    margin: 0;
+    padding: 2rem;
+  }
 `;
 
 const GridContainer = styled.ul`
@@ -76,11 +74,6 @@ const GridContainer = styled.ul`
   ${({ theme }) => theme.device.md} {
     grid-template-columns: repeat(1, minmax(0, 1fr));
   }
-`;
-
-const Filter = styled(VscListFilter)`
-  margin-top: 0;
-  margin-bottom: 1rem;
 `;
 
 export default SearchPage;

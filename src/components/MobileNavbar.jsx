@@ -8,7 +8,7 @@ import { AiOutlineMenu } from "react-icons/ai";
 import { navBarContext } from "../context/NavBarContext";
 import { useContext } from "react";
 
-function Navbar() {
+function MobileNavbar() {
   const { mobileMenu } = useContext(Context);
 
   return (
@@ -47,16 +47,24 @@ const N = {
     overflow-y: auto;
     height: 100vh;
     padding: 1rem 0;
-    // transform: translateX(0);
-    // transition-property: all;
-    // transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    // transition-duration: 150ms;
+    transform: translateX(0);
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
     width: 5rem;
     flex-shrink: 0;
+    overflow: auto;
+    touch-action: auto;
 
     ${({ theme }) => theme.device.md} {
-      display: none;
-      // transform: translateX(-240px);
+      display: fixed;
+      width: 7rem;
+      text-align: center;
+      background-color: rgb(24 24 27);
+      margin-left: 2rem;
+      top: 3rem;
+      z-index: 999999;
+      -webkit-box-pack: center;
     }
   `,
 
@@ -64,7 +72,7 @@ const N = {
     display: flex;
     padding: 1.25rem 0;
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.7rem;
   `,
 
   Article: styled.div`
@@ -85,4 +93,4 @@ const N = {
   `,
 };
 
-export default Navbar;
+export default MobileNavbar;

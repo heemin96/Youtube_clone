@@ -45,37 +45,11 @@ function Home() {
     ).then((data) => setChangeVideos(data.items));
   }, [category]);
 
-  console.log("changevid", changeVideos);
-
   return (
-    <HomeContainer>
-      <NavbarSection>
-        <Navbar />
-      </NavbarSection>
-
-      <VideoSection>
-        <Videos changeVideos={changeVideos} />
-      </VideoSection>
-    </HomeContainer>
+    <>
+      <Videos changeVideos={changeVideos} />
+    </>
   );
 }
-
-const HomeContainer = styled.div`
-  display: grid;
-
-  grid-template-columns: 10px auto;
-  grid-template-areas: //
-    "navbar content";
-
-  background-color: rgb(24 24 27);
-`;
-
-const NavbarSection = styled.div`
-  grid-area: navbar;
-`;
-
-const VideoSection = styled.div`
-  grid-area: content;
-`;
 
 export default Home;

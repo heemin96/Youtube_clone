@@ -1,23 +1,25 @@
 import React from "react";
-import styled, { css } from "styled-components";
-import ScrollContainer, { useScrollContainer } from "react-indiana-drag-scroll";
 
-import "react-indiana-drag-scroll/dist/style.css";
+import styled, { css } from "styled-components";
+
+import AlwaysScrollSection from "./AlwaysScrollSection";
 import CategoriesList from "../util/List/CategoriesList";
 
 const Categories = ({ category, onSelect }) => {
   return (
-    <C.Section>
-      {CategoriesList.map((c) => (
-        <C.Button
-          key={c.key}
-          active={category === c.key}
-          onClick={() => onSelect(c.key)}
-        >
-          {c.name}
-        </C.Button>
-      ))}
-    </C.Section>
+    <AlwaysScrollSection>
+      <C.Section>
+        {CategoriesList.map((c) => (
+          <C.Button
+            key={c.key}
+            active={category === c.key}
+            onClick={() => onSelect(c.key)}
+          >
+            {c.name}
+          </C.Button>
+        ))}
+      </C.Section>
+    </AlwaysScrollSection>
   );
 };
 
@@ -25,12 +27,15 @@ const C = {
   Section: styled.div`
     display: flex;
     gap: 1rem;
+    wrap: no-wrap;
     align-self: start;
-    flex-wrap: wrap;
+    margin-bottom: 1rem;
   `,
 
   Button: styled.button`
-    font-size: 1rem;
+    display: flex;
+    flex-shrink: 0;
+    height: 10%;
     background-color: black;
     padding: 0.5rem 1rem;
     color: white;

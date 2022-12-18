@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState } from "react";
 
 export const Context = createContext();
 
@@ -6,12 +6,7 @@ export const AppContext = (props) => {
   const [mobileMenu, setMobileMenu] = useState(false);
 
   return (
-    <Context.Provider
-      value={{
-        mobileMenu,
-        setMobileMenu,
-      }}
-    >
+    <Context.Provider value={{ mobileMenu, setMobileMenu }}>
       {props.children}
     </Context.Provider>
   );

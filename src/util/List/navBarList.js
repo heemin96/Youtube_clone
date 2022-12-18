@@ -9,6 +9,8 @@ import {
 import { SiYoutubemusic } from "react-icons/si";
 import { TfiDownload } from "react-icons/tfi";
 import { Home } from "../../components/Navbar";
+import { RiVideoAddLine } from "react-icons/ri";
+import { FiBell } from "react-icons/fi";
 
 export const navBarList = [
   {
@@ -46,5 +48,20 @@ export const navBarList = [
     name: "Download",
     icon: <TfiDownload />,
     path: "/download",
+  },
+];
+
+export const navBarSettingList = [
+  {
+    key: "1",
+    name: "Video",
+    icon: <RiVideoAddLine />,
+    path: "/Video",
+  },
+  {
+    key: "2",
+    name: "Setting",
+    icon: <FiBell />,
+    path: "/Setting",
   },
 ];

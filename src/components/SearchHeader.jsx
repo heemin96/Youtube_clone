@@ -1,10 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+
 import { Link, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
+import { Context } from "../context/NavBarContext";
+
 import { BsYoutube, BsSearch } from "react-icons/bs";
 import { AiOutlineMenu } from "react-icons/ai";
-import { useContext } from "react";
-import { Context } from "../context/NavBarContext";
+import { CgClose } from "react-icons/cg";
+import { IoIosSearch } from "react-icons/io";
+import { RiVideoAddLine } from "react-icons/ri";
+import { FiBell } from "react-icons/fi";
+import Navbar from "./Navbar";
+import MobileNavbar from "./MobileNavbar";
 
 function SearchHeader() {
   const { mobileMenu, setMobileMenu } = useContext(Context);
@@ -20,11 +27,7 @@ function SearchHeader() {
   //serch 초기화
   useEffect(() => setText(keyword || ""), [keyword]);
 
-  //메뉴버튼
-  const [isOpen, setIsOpen] = useState(false);
-  const toggle = () => setIsOpen(!isOpen);
-
-  //navbar
+  //menubar
   const mobileMenuToggle = () => {
     setMobileMenu(!mobileMenu);
   };
@@ -32,8 +35,11 @@ function SearchHeader() {
   return (
     <>
       <Header>
-        <div style={{ display: "flex" }}>
-          <Menubar onClick={toggle} />
+        <LeftSection>
+          <Menubar onClick={mobileMenuToggle}>
+            {mobileMenu ? <CloseButton /> : <MenuButton />}
+            {mobileMenu ? <MobileNavbar /> : ""}
+          </Menubar>
           <LinkSection to="/">
             <YoutubeLogo />
             <YoutubeTitle>
@@ -41,57 +47,98 @@ function SearchHeader() {
               <YoutubeTitleCountry>KR.</YoutubeTitleCountry>
             </YoutubeTitle>
           </LinkSection>
-        </div>
+        </LeftSection>
 
-        <div>
+        <CenterSection>
           <SearchForm onSubmit={handleSubmit}>
-            <SearchInput
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-            />
+            <SearchBorder>
+              <SearchInput
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+              />
+            </SearchBorder>
             <SearchButton>
-              <BsSearch />
+              <SearchIcon />
             </SearchButton>
           </SearchForm>
-        </div>
+        </CenterSection>
 
-        <IconSection></IconSection>
+        <RightSection>
+          <RightIcon>
+            <JustIcon>
+              <VideoIcon />
+            </JustIcon>
+            <JustIcon>
+              <BellIcon />
+            </JustIcon>
+          </RightIcon>
+        </RightSection>
       </Header>
     </>
   );
 }
 
 const Header = styled.div`
-  font-size: 1.5rem;
-  line-height: 2rem;
-  height: 3.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem;
-  position: sticky;
-  top: 0;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  height: 3.5rem;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
   background-color: rgb(24 24 27);
-  z-index: 1000;
-  max-width: 100%;
 
-  // ${({ theme }) => theme.device.md} {
-  //   padding-left: 1.25rem;
-  //   padding-right: 1.25rem;
+  ${({ theme }) => theme.device.md} {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+`;
+
+const LeftSection = styled.div`
+  display: flex;
+  height: 1.25rem;
+  align-items: center;
+`;
+
+const Menubar = styled.div`
+  display: none;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  height: 3rem;
+  width: 3rem;
+
+  // &:hover {
+  //   opacity: 0.6;
   // }
+
+  ${({ theme }) => theme.device.md} {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    display: flex;
+  }
 `;
 
-const Menubar = styled(AiOutlineMenu)`
-  font-size: 1.6rem;
-  align-self: center;
-  flex-shrink: 0;
-  margin-left: 1.2rem;
-  margin-right: 3rem;
+const CloseButton = styled(CgClose)`
+  color: white;
+  font-size: 3rem;
 `;
+
+const MenuButton = styled(AiOutlineMenu)`
+  color: white;
+  font-size: 3rem;
+`;
+
 const LinkSection = styled(Link)`
   display: flex;
   align-items: center;
+  height: 1.25rem;
 `;
 
 const YoutubeTitle = styled.h1`
@@ -99,6 +146,10 @@ const YoutubeTitle = styled.h1`
   font-size: 1.5rem;
   letter-spacing: -0.1rem;
   display: flex;
+
+  ${({ theme }) => theme.device.md} {
+    display: none;
+  }
 `;
 
 const YoutubeTitleCountry = styled.span`
@@ -109,44 +160,131 @@ const YoutubeTitleCountry = styled.span`
 `;
 
 const YoutubeLogo = styled(BsYoutube)`
-  font-size: 2.25rem;
-  line-height: 2.5rem;
+  font-size: 1.7rem;
+  display: block;
   color: red;
-  margin-top: 0.2rem;
+
+  ${({ theme }) => theme.device.md} {
+    font-size: 2rem;
+  }
 `;
 
-const SearchForm = styled.form`
+const CenterSection = styled.div`
   display: flex;
+  align-items: center;
+`;
+////////////////////////////////////////////////////////////////
+const SearchBorder = styled.div`
+  display: flex;
+  height: 2.5rem;
+  margin-left: 2.5rem;
+  padding-left: 1.25rem;
+  border: 1px solid #303030;
+  border-radius: 0.25rem;
+  border-top-left-radius: 1.5rem;
+  border-bottom-left-radius: 1.5rem;
+`;
+
+const Test2 = styled.div`
+  display: flex;
+  width: 2.5rem;
+  align-items: center;
   justify-content: center;
-  boder-radius: 10rem;
-  max-width: 100%;
-`;
 
-const SearchInput = styled.input.attrs((props) => ({
-  type: "text",
-  placeholder: "Search...",
-}))`
-  color: white;
-  padding: 0.5rem;
-  outline: none;
-  border-radius: 0.7rem;
-  font-size: 1rem;
-  background-color: black;
-`;
-
-const SearchButton = styled.button`
-  padding-left: 1rem;
-  padding-right: 1rem;
-  background-color: transparent;
-  border-radius: 0.7rem;
-  border: none;
-`;
-
-const IconSection = styled.div`
-  width: 10%;
   ${({ theme }) => theme.device.md} {
     display: none;
   }
 `;
 
+const SearchIcon = styled(IoIosSearch)`
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+`;
+
+const SearchInput = styled.input.attrs((props) => ({
+  type: "text",
+  placeholder: "검색",
+}))`
+  background-color: transparent;
+  outline: none;
+  text-color: white;
+  padding-right: 0;
+  padding-left: 0;
+  width: 31rem;
+  font-size: 1rem;
+
+  ${({ theme }) => theme.device.lg} {
+    width: 16rem;
+  }
+
+  ${({ theme }) => theme.device.md} {
+    width: 11rem;
+  }
+`;
+
+const SearchForm = styled.form`
+  display: flex;
+  justify-content: center;
+  border-radius: 10rem;
+  max-width: 100%;
+`;
+
+const SearchButton = styled.button`
+  display: flex;
+  width: 60px;
+  height: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #303030;
+  border-left-width: 0px;
+  border-top-right-radius: 1.5rem;
+  border-bottom-right-radius: 1.5rem;
+  background-color: black;
+  opacity: 0.9;
+
+  ${({ theme }) => theme.device.md} {
+    width: 40px;
+    height: 2.5rem;
+  }
+`;
+
+////////////////////////////////////////////////////////////////
+const RightSection = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const RightIcon = styled.div`
+  display: flex;
+
+  ${({ theme }) => theme.device.md} {
+    display: none;
+  }
+`;
+
+const JustIcon = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 9999px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #303030;
+    opacity: 0.6;
+  }
+`;
+
+const VideoIcon = styled(RiVideoAddLine)`
+  color: white;
+  font-size: 1.5rem;
+`;
+
+const BellIcon = styled(FiBell)`
+  color: white;
+  font-size: 1.5rem;
+`;
 export default SearchHeader;
