@@ -10,6 +10,7 @@ body {
 
   /* @apply flex flex-col items-center; */
   @apply bg-zinc-900 text-gray-50;
+  overflow: auto;
 }
 
 #root {

@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { fetchFromApi } from "../api/fetchFromApi";
 
 import VideoCard from "../components/VideoCard";
-import Navbar from "../components/Navbar";
+import Sidebar from "../components/Sidebar";
 import Categories from "../components/Categories";
 
 function Videos({}) {
@@ -16,8 +16,6 @@ function Videos({}) {
   // Categories.js에서 onSelect함수를 onClick으로 설정
   const onSelect = useCallback((category) => setCategory(category), []);
 
-  /////////////////////////////////////////////////////////////////
-
   useEffect(() => {
     fetchFromApi(
       `videos?part=snippet&chart=mostPopular&maxResults=25&regionCode=kr&videoCategoryId=${category}`
@@ -26,7 +24,7 @@ function Videos({}) {
 
   return (
     <>
-      <Navbar />
+      <Sidebar />
       <FlexContainer>
         <Categories
           category={category}
@@ -48,14 +46,8 @@ function Videos({}) {
 }
 
 const FlexContainer = styled.div`
-  // display: flex;
-  // flex-direction: column;
   padding: 2rem 3rem 0rem 6rem;
-  overflow: scroll;
-  // width: calc(100% - 56px);
-  // flex-direction: column;
-  // align-items: center;
-  // gap: 2rem;
+  overflow: auto;
 
   ${({ theme }) => theme.device.md} {
     margin: 0;

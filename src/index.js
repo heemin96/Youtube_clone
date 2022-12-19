@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import reportWebVitals from "./reportWebVitals";
-import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
 import App from "./App";
+import "./index.css";
 import NotFound from "./pages/NotFound";
-import Videos from "./pages/Videos";
 import VideoDetail from "./pages/VideoDetail";
 import Home from "./pages/Home";
 import SearchPage from "./pages/SearchPage";
@@ -17,7 +17,7 @@ const router = createBrowserRouter([
     errorElement: <NotFound />,
     children: [
       { index: true, element: <Home /> },
-      { path: "videos", element: <Home /> },
+      { path: "", element: <Home /> },
       { path: "videos/:keyword", element: <SearchPage /> },
       { path: "videos/watch/:videoId", element: <VideoDetail /> },
     ],

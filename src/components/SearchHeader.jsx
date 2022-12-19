@@ -10,8 +10,7 @@ import { CgClose } from "react-icons/cg";
 import { IoIosSearch } from "react-icons/io";
 import { RiVideoAddLine } from "react-icons/ri";
 import { FiBell } from "react-icons/fi";
-import Navbar from "./Navbar";
-import MobileNavbar from "./MobileNavbar";
+import MobileSidebar from "./MobileSidebar";
 
 function SearchHeader() {
   const { mobileMenu, setMobileMenu } = useContext(Context);
@@ -19,6 +18,7 @@ function SearchHeader() {
   const { keyword } = useParams();
   const navigate = useNavigate();
   const [text, setText] = useState("");
+
   const handleSubmit = (e) => {
     e.preventDefault();
     navigate(`/videos/${text}`);
@@ -38,7 +38,7 @@ function SearchHeader() {
         <LeftSection>
           <Menubar onClick={mobileMenuToggle}>
             {mobileMenu ? <CloseButton /> : <MenuButton />}
-            {mobileMenu ? <MobileNavbar /> : ""}
+            {mobileMenu ? <MobileSidebar /> : ""}
           </Menubar>
           <LinkSection to="/">
             <YoutubeLogo />
@@ -98,7 +98,7 @@ const Header = styled.div`
     padding-right: 1rem;
   }
 `;
-
+/////////////////////////////Left//////////////////////////////
 const LeftSection = styled.div`
   display: flex;
   height: 1.25rem;
@@ -163,17 +163,22 @@ const YoutubeLogo = styled(BsYoutube)`
   font-size: 1.7rem;
   display: block;
   color: red;
+  margin-right: 0.3rem;
+  margin-top: 0.2rem;
 
   ${({ theme }) => theme.device.md} {
     font-size: 2rem;
+    margin-top: 0;
   }
 `;
+
+/////////////////////////////Center//////////////////////////////
 
 const CenterSection = styled.div`
   display: flex;
   align-items: center;
 `;
-////////////////////////////////////////////////////////////////
+
 const SearchBorder = styled.div`
   display: flex;
   height: 2.5rem;
@@ -183,17 +188,6 @@ const SearchBorder = styled.div`
   border-radius: 0.25rem;
   border-top-left-radius: 1.5rem;
   border-bottom-left-radius: 1.5rem;
-`;
-
-const Test2 = styled.div`
-  display: flex;
-  width: 2.5rem;
-  align-items: center;
-  justify-content: center;
-
-  ${({ theme }) => theme.device.md} {
-    display: none;
-  }
 `;
 
 const SearchIcon = styled(IoIosSearch)`
@@ -249,7 +243,7 @@ const SearchButton = styled.button`
   }
 `;
 
-////////////////////////////////////////////////////////////////
+/////////////////////////////Right//////////////////////////////
 const RightSection = styled.div`
   display: flex;
   align-items: center;
@@ -287,4 +281,5 @@ const BellIcon = styled(FiBell)`
   color: white;
   font-size: 1.5rem;
 `;
+
 export default SearchHeader;

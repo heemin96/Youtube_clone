@@ -8,15 +8,15 @@ import { AiOutlineMenu } from "react-icons/ai";
 import { navBarContext } from "../context/NavBarContext";
 import { useContext } from "react";
 
-function Navbar() {
+function Sidebar() {
   const { mobileMenu } = useContext(Context);
 
   return (
     <N.Container>
       <N.InnerContainer>
         {navBarList.map(({ icon, name, key, path }) => (
-          <NavLink to={path}>
-            <N.Article key={key}>
+          <NavLink to={path} key={key}>
+            <N.Article>
               <N.Icon>{icon}</N.Icon>
               <N.Text>{name}</N.Text>
             </N.Article>
@@ -26,8 +26,8 @@ function Navbar() {
         <hr className="m-4 border-white/[0.2]" />
 
         {navBarSettingList.map(({ icon, name, key, path }) => (
-          <NavLink to={path}>
-            <N.Article key={key}>
+          <NavLink to={path} key={key}>
+            <N.Article>
               <N.Icon>{icon}</N.Icon>
               <N.Text>{name}</N.Text>
             </N.Article>
@@ -47,16 +47,26 @@ const N = {
     overflow-y: auto;
     height: 100vh;
     padding: 1rem 0;
-    // transform: translateX(0);
-    // transition-property: all;
-    // transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    // transition-duration: 150ms;
-    width: 5rem;
+    width: 6rem;
     flex-shrink: 0;
+
+    &::-webkit-scrollbar {
+      // 세로 스크롤 넓이
+      width: 0.4rem;
+
+      // 가로 스크롤 높이
+      height: 0.2rem;
+      border-radius: 1rem;
+      background-color: rgba(255, 255, 255, 0.4);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(0, 0, 0, 0.3);
+      border-radius: 1rem;
+    }
 
     ${({ theme }) => theme.device.md} {
       display: none;
-      // transform: translateX(-240px);
     }
   `,
 
@@ -85,4 +95,4 @@ const N = {
   `,
 };
 
-export default Navbar;
+export default Sidebar;

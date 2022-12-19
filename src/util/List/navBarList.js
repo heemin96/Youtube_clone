@@ -8,7 +8,7 @@ import {
 } from "react-icons/md";
 import { SiYoutubemusic } from "react-icons/si";
 import { TfiDownload } from "react-icons/tfi";
-import { Home } from "../../components/Navbar";
+import { Home } from "../../components/Sidebar";
 import { RiVideoAddLine } from "react-icons/ri";
 import { FiBell } from "react-icons/fi";
 

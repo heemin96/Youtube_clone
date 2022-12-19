@@ -6,14 +6,9 @@ import {
   useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
-import VideoCard from "../components/VideoCard";
 import { useYoutubeApi } from "../context/YoutubeApiContext";
-import styled from "styled-components";
-import Navbar from "../components/Navbar";
-import Categories from "../components/Categories";
 import Videos from "./Videos";
 import CategoriesList from "../util/List/CategoriesList";
-import axios from "axios";
 import { fetchFromApi } from "../api/fetchFromApi";
 
 function Home() {

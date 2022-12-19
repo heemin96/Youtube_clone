@@ -43,6 +43,7 @@ const VideoDetailPageSection = styled.section`
   display: flex;
   flex-direction: row;
   gap: 1rem;
+  padding: 1rem;
 
   @media (max-width: 1024px) {
     flex-direction: column;

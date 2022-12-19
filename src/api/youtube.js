@@ -3,10 +3,9 @@ export default class Youtube {
     this.apiClient = apiClient;
   }
 
-  //검색어 있으면 검색 페이지 아니면 mostPopular 페이지.
-  async search(keyword) {
-    return keyword ? this.searchByKeyword(keyword) : this.mostPopular();
-  }
+  // async search(keyword) {
+  //   return keyword ? this.searchByKeyword(keyword) : "";
+  // }
 
   async channelImageURL(id) {
     return this.apiClient
@@ -37,6 +36,7 @@ export default class Youtube {
           maxResults: 25,
           type: "video",
           q: keyword,
+          // pagePram: "2",
         },
       })
       .then((res) =>

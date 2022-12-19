@@ -7,7 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useYoutubeApi } from "../context/YoutubeApiContext";
 
 import VideoCard from "../components/VideoCard";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/Sidebar";
 
 function SearchPage({ changeVideos }) {
   const { keyword } = useParams();
@@ -16,7 +16,7 @@ function SearchPage({ changeVideos }) {
     isLoading,
     error,
     data: videos,
-  } = useQuery(["videos", keyword], () => youtube.search(keyword), {
+  } = useQuery(["videos", keyword], () => youtube.searchByKeyword(keyword), {
     staleTime: 1000 * 60 * 1,
   }); //2번째 인자로 함수 받음 (Axios)
 

@@ -7,8 +7,6 @@ import { AppContext } from "./context/NavBarContext";
 import SearchHeader from "./components/SearchHeader";
 import { theme } from "./styles/theme";
 import "./styles/global.css";
-import Navbar from "./components/Navbar";
-import { Context } from "./context/NavBarContext";
 
 const queryClient = new QueryClient();
 

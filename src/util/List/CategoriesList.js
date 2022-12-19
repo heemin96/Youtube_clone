@@ -15,10 +15,10 @@ const CategoriesList = [
     key: "17",
     name: "스포츠",
   },
-  {
-    key: "19",
-    name: "여행",
-  },
+  // {
+  //   key: "19",
+  //   name: "여행",
+  // },
   {
     key: "20",
     name: "게임",
@@ -40,10 +40,10 @@ const CategoriesList = [
     name: "스타일",
   },
 
-  {
-    key: "27",
-    name: "교육",
-  },
+  // {
+  //   key: "27",
+  //   name: "교육",
+  // },
   {
     key: "28",
     name: "과학",
