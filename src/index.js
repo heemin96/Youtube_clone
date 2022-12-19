@@ -9,6 +9,7 @@ import NotFound from "./pages/NotFound";
 import VideoDetail from "./pages/VideoDetail";
 import Home from "./pages/Home";
 import SearchPage from "./pages/SearchPage";
+import InfiniteScroll from "./pages/InfiniteScroll";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: "", element: <Home /> },
+      { path: "Infinite", element: <InfiniteScroll /> },
       { path: "videos/:keyword", element: <SearchPage /> },
       { path: "videos/watch/:videoId", element: <VideoDetail /> },
     ],
