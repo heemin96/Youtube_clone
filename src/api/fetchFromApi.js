@@ -9,11 +9,13 @@ const options = {
   url: BASE_URL,
 
   params: {
-    key: "AIzaSyA3mRPgb8NWnOgf0ch66CImJ27X7GuNvKY",
+    // key: "AIzaSyA3mRPgb8NWnOgf0ch66CImJ27X7GuNvKY",
+    // key: "AIzaSyD-ouh6lLHcsu7sjMEk3Cu_bn55yQuc8-g",
+    key: "AIzaSyAS8epuAPbukedp94_5vdsx2tXwaJDszS",
   },
 };
 
-export const fetchFromApi = async (url, pageParam = 1) => {
+export const fetchFromApi = async (url) => {
   const { data } = await axios.get(`${BASE_URL}/${url}`, options);
 
   // console.log(data.items);

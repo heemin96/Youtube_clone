@@ -18,7 +18,7 @@ export default class Youtube {
       .search({
         params: {
           part: "snippet",
-          maxResults: 25,
+          maxResults: 1,
           type: "video",
           relatedToVideoId: id,
         },
@@ -28,15 +28,15 @@ export default class Youtube {
       );
   }
 
-  async searchByKeyword(keyword) {
+  async searchByKeyword(keyword, pageToken) {
     return this.apiClient
       .search({
         params: {
           part: "snippet",
-          maxResults: 25,
+          maxResults: 1,
           type: "video",
           q: keyword,
-          // pagePram: "2",
+          pageToken: pageToken,
         },
       })
       .then((res) =>
@@ -49,7 +49,7 @@ export default class Youtube {
       .videos({
         params: {
           part: "snippet",
-          maxResults: 25,
+          maxResults: 1,
           chart: "mostPopular",
           regionCode: "kr",
           videoCategoryId: key,

@@ -3,7 +3,7 @@ import { formatAgo } from "../util/date";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-function VideoCard({ video, type, list }) {
+function SearchVideoCard({ video, type, list }) {
   const { title, thumbnails, channelTitle, publishedAt } = video.snippet;
   const navigate = useNavigate();
   return (
@@ -23,14 +23,6 @@ function VideoCard({ video, type, list }) {
         <ChannelTitile>{channelTitle}</ChannelTitile>
         <FormatAgo>{formatAgo(publishedAt, "ko")}</FormatAgo>
       </div>
-      {/* 
-      {list.map((c) => (
-        <img
-          style={{ width: "100%", borderRadius: "1rem" }}
-          src={thumbnails.medium.url}
-          alt={title}
-        />
-      ))} */}
     </li>
   );
 }
@@ -57,4 +49,4 @@ const FormatAgo = styled.p`
   opacity: 0.8;
 `;
 
-export default VideoCard;
+export default SearchVideoCard;

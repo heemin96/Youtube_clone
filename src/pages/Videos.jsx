@@ -18,7 +18,7 @@ function Videos({}) {
 
   useEffect(() => {
     fetchFromApi(
-      `videos?part=snippet&chart=mostPopular&maxResults=25&regionCode=kr&videoCategoryId=${category}`
+      `videos?part=snippet&chart=mostPopular&maxResults=1&regionCode=kr&videoCategoryId=${category}`
     ).then((data) => setChangeVideos(data.items));
   }, [category]);
 
