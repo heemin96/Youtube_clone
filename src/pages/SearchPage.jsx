@@ -13,42 +13,46 @@ import SearchVideoCard from "../components/SearchVideoCard";
 function SearchPage({}) {
   const { keyword } = useParams();
   const { youtube } = useYoutubeApi();
-  const [list, setList] = useState([]); //영상목록 저장
+  const [lists, setLists] = useState([]); //영상목록 저장
   const [nextPageTok, setNextPageTok] = useState(); //nextPageToken을 저장
 
   // const [searchQ, setSearchQ] = useState(); //마지막으로 검색한 단어를 저장,nextPageToken 사용할 때 필요
   // const [isLoading, setIsLoading] = useState(false); //로딩중 애니메이션을 위한 State
 
-  function listAdd([a]) {
-    return setList(list.push[a]);
+  function listAdd(list) {
+    return setLists(lists + list);
+  }
+
+  function listAdd2(list2) {
+    return setLists([...lists, list2]);
   }
 
   const {
     fetchNextPage, //function
     hasNextPage, // boolean
     isFetchingNextPage, // boolean
-    data,
+    data: videos,
     status,
     // isLoading,
     error,
-    data: videos,
   } = useQuery(
     ["videos", keyword],
-    () => youtube.searchByKeyword(keyword).then(data),
+    () => youtube.searchByKeyword(keyword).then(videos),
+    // => setChangeVideos(data.items),
     {
       staleTime: 1000 * 60 * 1,
     }
   ); //2번째 인자로 함수 받음 (Axios)
 
   const loadMore = () => {
-    //아까 저장해두었던 searchQ(검색어),nextPageTok을 이용해서 다음 영상목록을 받아옵니다.
-    youtube.searchByKeyword(keyword, nextPageTok).then((videos) => {
+    //nextPageTok을 이용해서 다음 영상목록을 받아옵니다.
+    youtube.searchByList(keyword, nextPageTok).then((videos) => {
       setNextPageTok(videos.nextPageToken); //새로운 nextPageToken을 저장합니다.
       listAdd([videos.items]); //기존 영상목록 뒤에 새로받아온 영상들을 추가합니다.
     });
   };
 
-  // console.log("list:", list);
+  console.log("lists:", lists);
   return (
     <>
       <Navbar />
@@ -58,7 +62,7 @@ function SearchPage({}) {
         <FlexContainer>
           <GridContainer>
             {videos.map((video) => (
-              <SearchVideoCard key={video.id} video={video} list={list} />
+              <SearchVideoCard key={video.id} video={video} />
             ))}
           </GridContainer>
           <button onClick={loadMore}>load more</button>

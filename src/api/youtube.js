@@ -36,7 +36,22 @@ export default class Youtube {
           maxResults: 1,
           type: "video",
           q: keyword,
-          pageToken: pageToken,
+        },
+      })
+      .then((res) =>
+        res.data.items.map((item) => ({ ...item, id: item.id.videoId }))
+      );
+  }
+
+  async searchByList(keyword, nextPageToken) {
+    return this.apiClient
+      .search({
+        params: {
+          part: "snippet",
+          maxResults: 1,
+          type: "video",
+          q: keyword,
+          pageToken: nextPageToken,
         },
       })
       .then((res) =>
