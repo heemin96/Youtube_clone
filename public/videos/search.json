@@ -4,8 +4,9 @@
   "nextPageToken": "CBkQAA",
   "regionCode": "KR",
   "pageInfo": {
-    "totalResults": 1000000,
-    "resultsPerPage": 25
+    "totalResults": 10,
+    "resultsPerPage": 10,
+    "maxResults": 1
   },
   "items": [
     {

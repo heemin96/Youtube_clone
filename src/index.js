@@ -12,6 +12,7 @@ import SearchPage from "./pages/SearchPage";
 import InfiniteScroll from "./pages/InfiniteScroll";
 import Example1 from "./pages/Example1";
 import Example2 from "./pages/Example2";
+import Example3 from "./pages/Example3";
 
 const router = createBrowserRouter([
   {
@@ -21,7 +22,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: "", element: <Home /> },
-      { path: "Infinite", element: <Example2 /> },
+      { path: "Infinite", element: <Example3 /> },
       { path: "videos/:keyword", element: <SearchPage /> },
       { path: "videos/watch/:videoId", element: <VideoDetail /> },
     ],
