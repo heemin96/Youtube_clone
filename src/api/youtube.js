@@ -3,9 +3,9 @@ export default class Youtube {
     this.apiClient = apiClient;
   }
 
-  // async search(keyword) {
-  //   return keyword ? this.searchByKeyword(keyword) : "";
-  // }
+  async search(keyword) {
+    return keyword ? this.searchByKeyword(keyword) : "";
+  }
 
   async channelImageURL(id) {
     return this.apiClient
