@@ -12,6 +12,7 @@ const options = {
     // key: "AIzaSyD-ouh6lLHcsu7sjMEk3Cu_bn55yQuc8-g",
     // key: "AIzaSyDEwx3BuGaKBQk6S_G7EDXMl3eO_QMMZpQ", //수아이
     // key: "AIzaSyA229KWb2mwQb9q7Bz5hXjitA2JUc5NsrU",
+    // key: "AIzaSyBrPGy2TK9no8ECQzfN9eXdmbItvXE5zhs", // max
   },
 };
 
