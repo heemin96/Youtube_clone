@@ -1,7 +1,7 @@
 import React, { memo } from "react";
 import styled from "styled-components";
 
-//memo ui성능 증가시키기위해 -> 고차 컴포넌트를 제공해 불필요한 리렌더링을 건너뛴다.
+//memo ui성능 증가시키기위해 -> 고차 컴포넌트를 제공해 불필요한 리렌더링을 건너뛴다(prop이 같다면).
 const AlwaysScrollSection = memo((props) => {
   const { children } = props;
   return <StyledAlwaysScrollSection>{children}</StyledAlwaysScrollSection>;

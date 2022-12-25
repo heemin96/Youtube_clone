@@ -6,10 +6,18 @@ import { fetchFromApi } from "../api/fetchFromApi";
 import VideoCard from "../components/VideoCard";
 import Sidebar from "../components/Sidebar";
 import Categories from "../components/Categories";
+import { useInView } from "react-intersection-observer";
+import { useYoutubeApi } from "../context/YoutubeApiContext";
 
 function Videos({}) {
   const [category, setCategory] = useState("1");
   const [changeVideos, setChangeVideos] = useState([]);
+  const [nextPageTok, setNextPageTok] = useState(); //nextPageToken을 저장
+  const [page, setPage] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [ref, inView] = useInView();
+  const { youtube } = useYoutubeApi();
 
   // onSelect: category값을 업데이트하는 함수
   // 그리고 category와 onSelect함수를 props로 전달
@@ -17,10 +25,42 @@ function Videos({}) {
   const onSelect = useCallback((category) => setCategory(category), []);
 
   useEffect(() => {
-    fetchFromApi(
-      `videos?part=snippet&chart=mostPopular&maxResults=1&regionCode=kr&videoCategoryId=${category}`
-    ).then((data) => setChangeVideos(data.items));
+    youtube.mostPopular(category).then((data) => {
+      setCategory(data.snippet.categoryId);
+      setChangeVideos(data.items);
+      setNextPageTok(data.nextPageToken);
+    });
   }, [category]);
+
+  function listAdd(list) {
+    return setChangeVideos(changeVideos.concat(list));
+  }
+
+  const getItems = useCallback(async () => {
+    //서버에 데이터 페이지별로 요청
+    setLoading(true);
+    youtube.mostPopularList(category, nextPageTok).then((data) => {
+      setNextPageTok(data.nextPageToken); //새로운 nextPageToken을 저장
+      listAdd(data.items); //기존 영상목록 뒤에 새로받아온 영상들을 추가
+    });
+    setLoading(false);
+  }, [page]);
+
+  useEffect(() => {
+    // getItems가 바뀔때 마다 데이터 불러오기
+    getItems();
+  }, [getItems]);
+
+  useEffect(() => {
+    // 사용자가 마지막 요소를 보고 있고, 로딩 중이 아니라면 page+=1
+    if (inView && !loading) {
+      setIsLoading(true);
+      setTimeout(() => {
+        setPage((prevState) => prevState + 1);
+        setIsLoading(0);
+      }, 1000);
+    }
+  }, [inView]);
 
   return (
     <>
@@ -40,6 +80,8 @@ function Videos({}) {
             />
           ))}
         </GridContainer>
+
+        <div ref={ref}>Element {inView.toString()}</div>
       </FlexContainer>
     </>
   );
@@ -60,6 +102,7 @@ const GridContainer = styled.ul`
   grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 0.5rem;
   row-gap: 1rem;
+  z-index: -10;
 
   ${({ theme }) => theme.device.xxl} {
     grid-template-columns: repeat(4, minmax(0, 1fr));

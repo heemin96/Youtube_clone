@@ -1,14 +1,14 @@
-import React, { useState, Ref, useEffect } from "react";
+import React, { useState, Ref, useEffect, useRef, useCallback } from "react";
 
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import ReactLoading from "react-loading";
 
 import { useYoutubeApi } from "../context/YoutubeApiContext";
 
 import Navbar from "../components/Sidebar";
 import SearchVideoCard from "../components/SearchVideoCard";
+import { useInView } from "react-intersection-observer";
 
 function SearchPage({}) {
   const { keyword } = useParams();
@@ -16,23 +16,18 @@ function SearchPage({}) {
   const [lists, setLists] = useState([]); //영상목록 저장
   const [nextPageTok, setNextPageTok] = useState(); //nextPageToken을 저장
   const [searchQ, setSearchQ] = useState(); //마지막으로 검색한 단어를 저장,nextPageToken 사용할 때 필요
-  const [page, setPage] = useState(1);
-  const [io, setIo] = useState(null);
-  const [itemList, setItemList] = useState([1, 2, 3, 4, 5]); // ItemList
-  const [target, setTarget] = useState(""); // target
-  const [isLoding, setIsLoding] = useState(false); // isloding
-
-  function listAdd(list) {
-    return setLists(lists.concat(list));
-  }
+  const [page, setPage] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [ref, inView] = useInView();
 
   const {
     fetchNextPage, //function
-    hasNextPage, // boolean
+    // hasNextPage, // boolean
     isFetchingNextPage, // boolean
     data: videos,
     status,
-    isLoading,
+    // isLoading,
     error,
   } = useQuery(["videos", keyword], () =>
     // .then((res) => res.data.items.map((item) => ({ ...item, id: item.id.videoId }))
@@ -43,49 +38,35 @@ function SearchPage({}) {
     })
   );
 
-  const loadMore = async () => {
-    //nextPageTok을 이용해서 다음 영상목록을 받아옵니다.
+  function listAdd(list) {
+    return setLists(lists.concat(list));
+  }
+
+  const getItems = useCallback(async () => {
+    //서버에 데이터 페이지별로 요청
+    setLoading(true);
     youtube.searchByList(keyword, nextPageTok).then((videos) => {
       setNextPageTok(videos.nextPageToken); //새로운 nextPageToken을 저장
       listAdd(videos.items); //기존 영상목록 뒤에 새로받아온 영상들을 추가
     });
-  };
-
-  const onIntersect = async ([entry], observer) => {
-    if (entry.isIntersecting && !isLoding) {
-      observer.unobserve(entry.target);
-      setIsLoding(true);
-      // 데이터를 가져오는 부분
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-
-      setIsLoding(false);
-      await loadMore();
-      observer.observe(entry.target);
-    }
-  };
-
-  /**
-   * intersection Observer를 사용하기위해 useEffect를 선언하고 intersection observer의 인자로 쓰일 함수를 선언하며 option을 지정
-   * target 엘리먼트로 지정한 target State가 첫 렌더링 때 생성될 것이고,
-   * 첫 렌더링 때와 이 target의 변경이 감지될 때 useEffect가 실행된다.
-   * callback 함수로는 위에 선언한 onIntersect 함수이고,
-   * option으로 threshold : 0.4를 지정했다.
-   *
-   */
+    setLoading(false);
+  }, [page]);
 
   useEffect(() => {
-    let observer;
-    if (target) {
-      // callback 함수, option
-      observer = new IntersectionObserver(onIntersect, {
-        threshold: 0.4,
-      });
-      observer.observe(target); // 타겟 엘리먼트 지정
-    }
-    return () => observer && observer.disconnect();
-  }, [target]);
+    // getItems가 바뀔때 마다 데이터 불러오기
+    getItems();
+  }, [getItems]);
 
-  console.log("list: ", lists);
+  useEffect(() => {
+    // 사용자가 마지막 요소를 보고 있고, 로딩 중이 아니라면 page+=1
+    if (inView && !loading) {
+      setIsLoading(true);
+      setTimeout(() => {
+        setPage((prevState) => prevState + 1);
+        setIsLoading(0);
+      }, 1000);
+    }
+  }, [inView]);
 
   return (
     <>
@@ -100,15 +81,7 @@ function SearchPage({}) {
           ))}
         </GridContainer>
 
-        {isLoding ? (
-          <LoaderWrap>
-            <ReactLoading type="spin" color="#A593E0" />
-          </LoaderWrap>
-        ) : (
-          ""
-        )}
-        {/* target State와 observer의 관찰 대상이 될  target Element */}
-        <div ref={setTarget}></div>
+        <div ref={ref}>Element {inView.toString()}</div>
       </FlexContainer>
     </>
   );
@@ -161,3 +134,11 @@ const LoaderWrap = styled.div`
   align-items: center;
 `;
 export default SearchPage;
+
+// const loadMore = () => {
+//   //nextPageTok을 이용해서 다음 영상목록을 받아옵니다.
+//   youtube.searchByList(keyword, nextPageTok).then((videos) => {
+//     setNextPageTok(videos.nextPageToken); //새로운 nextPageToken을 저장
+//     listAdd(videos.items); //기존 영상목록 뒤에 새로받아온 영상들을 추가
+//   });
+// };

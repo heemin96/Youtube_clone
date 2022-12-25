@@ -18,7 +18,7 @@ export default class Youtube {
       .search({
         params: {
           part: "snippet",
-          maxResults: 1,
+          maxResults: 10,
           type: "video",
           relatedToVideoId: id,
         },
@@ -49,7 +49,7 @@ export default class Youtube {
       .search({
         params: {
           part: "snippet",
-          maxResults: 1,
+          maxResults: 10,
           type: "video",
           q: keyword,
           pageToken: nextPageTok,
@@ -58,17 +58,32 @@ export default class Youtube {
       .then((res) => res.data);
   }
 
-  async mostPopular(key) {
+  async mostPopular(category) {
     return this.apiClient
       .videos({
         params: {
           part: "snippet",
-          maxResults: 1,
+          maxResults: 10,
           chart: "mostPopular",
           regionCode: "kr",
-          videoCategoryId: key,
+          videoCategoryId: category,
         },
       })
-      .then((res) => res.data.items);
+      .then((res) => res.data);
+  }
+
+  async mostPopularList(category, nextPageTok) {
+    return this.apiClient
+      .videos({
+        params: {
+          part: "snippet",
+          maxResults: 10,
+          chart: "mostPopular",
+          regionCode: "kr",
+          videoCategoryId: category,
+          pageToken: nextPageTok,
+        },
+      })
+      .then((res) => res.data);
   }
 }

@@ -3,6 +3,8 @@ import React, { useEffect, useState, useContext } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { Context } from "../context/NavBarContext";
+import SlidingPane from "react-sliding-pane";
+import "react-sliding-pane/dist/react-sliding-pane.css";
 
 import { BsYoutube, BsSearch } from "react-icons/bs";
 import { AiOutlineMenu } from "react-icons/ai";
@@ -18,6 +20,10 @@ function SearchHeader() {
   const { keyword } = useParams();
   const navigate = useNavigate();
   const [text, setText] = useState("");
+  const [state, setState] = useState({
+    isPaneOpen: false,
+    isPaneOpenLeft: false,
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -36,10 +42,21 @@ function SearchHeader() {
     <>
       <Header>
         <LeftSection>
-          <Menubar onClick={mobileMenuToggle}>
-            {mobileMenu ? <CloseButton /> : <MenuButton />}
-            {mobileMenu ? <MobileSidebar /> : ""}
+          <Menubar onClick={() => setState({ isPaneOpenLeft: true })}>
+            <MenuButton />
           </Menubar>
+
+          <SlidingPane
+            closeIcon={<CloseButton />}
+            isOpen={state.isPaneOpenLeft}
+            from="left"
+            width="1px"
+            hideHeader="none"
+            onRequestClose={() => setState({ isPaneOpenLeft: false })}
+          >
+            <MobileSidebar />
+          </SlidingPane>
+
           <LinkSection to="/">
             <YoutubeLogo />
             <YoutubeTitle>
@@ -81,7 +98,7 @@ function SearchHeader() {
 const Header = styled.div`
   position: sticky;
   top: 0;
-  z-index: 1000;
+  z-index: 1;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -126,7 +143,7 @@ const Menubar = styled.div`
 `;
 
 const CloseButton = styled(CgClose)`
-  color: white;
+  color: black;
   font-size: 3rem;
 `;
 

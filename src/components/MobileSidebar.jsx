@@ -41,7 +41,7 @@ const N = {
     display: none;
     position: fixed;
     height: -webkit-fill-available;
-    width: 5rem;
+    width: 7rem;
     flex-shrink: 0;
     overflow: auto;
     touch-action: auto;
@@ -70,6 +70,7 @@ const N = {
       top: 3.5rem;
       z-index: 999999;
       -webkit-box-pack: center;
+      margin-left: -2rem;
 
   `,
 
@@ -77,7 +78,7 @@ const N = {
     display: flex;
     padding: 1.25rem 0;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 1rem;
 
     }
   `,

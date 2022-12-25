@@ -1,6 +1,6 @@
 import axios from "axios";
 
-//class 멤버 함수이므로 function 안적어도 된다.
+//class 멤버 함수(클래스 내부에 정의된 함수)이므로 function 안적어도 된다.
 //외부에서 class 쓰기위해.
 export default class FakeYoutubeClient {
   async search({ params }) {

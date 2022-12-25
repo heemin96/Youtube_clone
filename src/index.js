@@ -9,10 +9,8 @@ import NotFound from "./pages/NotFound";
 import VideoDetail from "./pages/VideoDetail";
 import Home from "./pages/Home";
 import SearchPage from "./pages/SearchPage";
-import InfiniteScroll from "./pages/InfiniteScroll";
-import Example1 from "./pages/Example1";
+
 import Example2 from "./pages/Example2";
-import Example3 from "./pages/Example3";
 import Example4 from "./pages/Example4";
 
 const router = createBrowserRouter([
