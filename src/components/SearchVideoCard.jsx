@@ -35,6 +35,7 @@ const Title = styled.p`
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
+  z-index: -1;
 `;
 
 const ChannelTitile = styled.p`
@@ -47,6 +48,7 @@ const FormatAgo = styled.p`
   font-size: 0.875rem;
   line-height: 1.25rem;
   opacity: 0.8;
+  z-index: -999;
 `;
 
 export default SearchVideoCard;

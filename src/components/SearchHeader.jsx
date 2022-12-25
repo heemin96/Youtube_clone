@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { Context } from "../context/NavBarContext";
 import SlidingPane from "react-sliding-pane";
 import "react-sliding-pane/dist/react-sliding-pane.css";
+import "../styles/sideSlide.css";
 
 import { BsYoutube, BsSearch } from "react-icons/bs";
 import { AiOutlineMenu } from "react-icons/ai";
@@ -50,8 +51,9 @@ function SearchHeader() {
             closeIcon={<CloseButton />}
             isOpen={state.isPaneOpenLeft}
             from="left"
-            width="1px"
-            hideHeader="none"
+            width="6rem"
+            // hideHeader="none"
+
             onRequestClose={() => setState({ isPaneOpenLeft: false })}
           >
             <MobileSidebar />
@@ -98,7 +100,7 @@ function SearchHeader() {
 const Header = styled.div`
   position: sticky;
   top: 0;
-  z-index: 1;
+  // z-index: 1;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -143,8 +145,9 @@ const Menubar = styled.div`
 `;
 
 const CloseButton = styled(CgClose)`
-  color: black;
-  font-size: 3rem;
+  color: white;
+  font-size: 20rem;
+  margin-left: 0.2rem;
 `;
 
 const MenuButton = styled(AiOutlineMenu)`

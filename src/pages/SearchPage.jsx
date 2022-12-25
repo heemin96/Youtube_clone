@@ -3,6 +3,7 @@ import React, { useState, Ref, useEffect, useRef, useCallback } from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
+import ReactLoading from "react-loading";
 
 import { useYoutubeApi } from "../context/YoutubeApiContext";
 
@@ -32,7 +33,7 @@ function SearchPage({}) {
   } = useQuery(["videos", keyword], () =>
     // .then((res) => res.data.items.map((item) => ({ ...item, id: item.id.videoId }))
     youtube.searchByKeyword(keyword).then((videos) => {
-      setSearchQ(keyword);
+      // setSearchQ(keyword);
       setNextPageTok(videos.nextPageToken);
       setLists(videos.items);
     })
@@ -44,12 +45,12 @@ function SearchPage({}) {
 
   const getItems = useCallback(async () => {
     //서버에 데이터 페이지별로 요청
-    setLoading(true);
+    // setLoading(true);
     youtube.searchByList(keyword, nextPageTok).then((videos) => {
       setNextPageTok(videos.nextPageToken); //새로운 nextPageToken을 저장
       listAdd(videos.items); //기존 영상목록 뒤에 새로받아온 영상들을 추가
     });
-    setLoading(false);
+    // setLoading(false);
   }, [page]);
 
   useEffect(() => {
@@ -60,11 +61,11 @@ function SearchPage({}) {
   useEffect(() => {
     // 사용자가 마지막 요소를 보고 있고, 로딩 중이 아니라면 page+=1
     if (inView && !loading) {
-      setIsLoading(true);
+      // setIsLoading(true);
       setTimeout(() => {
         setPage((prevState) => prevState + 1);
-        setIsLoading(0);
-      }, 1000);
+        // setIsLoading(0);
+      }, 0);
     }
   }, [inView]);
 
@@ -80,8 +81,14 @@ function SearchPage({}) {
             <SearchVideoCard key={index} video={video} />
           ))}
         </GridContainer>
-
-        <div ref={ref}>Element {inView.toString()}</div>
+        {isLoading ? (
+          <LoaderWrap>
+            <ReactLoading type="spin" color="#A593E0" />
+          </LoaderWrap>
+        ) : (
+          ""
+        )}
+        <div ref={ref}> {inView.toString()}</div>
       </FlexContainer>
     </>
   );

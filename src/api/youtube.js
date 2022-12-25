@@ -29,19 +29,19 @@ export default class Youtube {
   }
 
   async searchByKeyword(keyword) {
-    return (
-      this.apiClient
-        .search({
-          params: {
-            part: "snippet",
-            maxResults: 1,
-            type: "video",
-            q: keyword,
-          },
-        })
-        // .then((res) => res.data.items.map((item) => ({ ...item, id: item.id.videoId }))
-        .then((res) => res.data)
-    );
+    return this.apiClient
+      .search({
+        params: {
+          part: "snippet",
+          maxResults: 1,
+          type: "video",
+          q: keyword,
+        },
+      })
+      .then(
+        (res) => res.data.map((item) => ({ ...item, id: item.id.videoId }))
+        // .then((res) => res.data)
+      );
   }
 
   async searchByList(keyword, nextPageTok) {

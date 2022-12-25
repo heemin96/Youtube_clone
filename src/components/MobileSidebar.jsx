@@ -38,15 +38,19 @@ function MobileSidebar() {
 
 const N = {
   Container: styled.div`
-    display: none;
+    
     position: fixed;
     height: -webkit-fill-available;
-    width: 7rem;
+    width: 6.3rem;
     flex-shrink: 0;
     overflow: auto;
     touch-action: auto;
     z-index:999999999;
-
+    margin-left: -2rem;
+    text-align: center;
+    background-color: rgb(24 24 27);
+    top: 3.5rem;
+    
   &::-webkit-scrollbar {
     // 세로 스크롤 넓이
     width: 0.4rem;
