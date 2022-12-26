@@ -5,7 +5,9 @@
 
 <p align="center">
   <br>
-<img src="https://user-images.githubusercontent.com/101728625/206084906-0b496764-6bf1-4976-a873-a1fd22630277.png"/>
+<!-- <img src="https://user-images.githubusercontent.com/101728625/206084906-0b496764-6bf1-4976-a873-a1fd22630277.png"/> -->
+<img src= "https://user-images.githubusercontent.com/101728625/209488378-3565438f-fa9d-4a81-b69d-5ec9df9ac763.png"/>
+  
   <br>
 </p>
 
@@ -48,7 +50,8 @@
   
 ### 기능 1
 - Grid를 통한 반응형 웹페이지
-- 스크롤바 변경
+- side bar  
+- 카테고리 기능 추가 
 
 ### 기능 2
 - React Query를 통해 데이터 관리하기
@@ -58,10 +61,11 @@
 - React-Router-Dom 을 통해 페이지 이동,검색하기 
 
 ### 기능 4
-- 실제 Api, 목데이터 나눠서 필요할때만  api 사용하기   
+- Infinite scrolling 
 
 ### 기능 5
-- 
+
+- 실제 Api, 목데이터 나눠서 필요할때만  api 사용하기   
 
 
 
