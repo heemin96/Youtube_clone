@@ -11,7 +11,6 @@ import Home from "./pages/Home";
 import SearchPage from "./pages/SearchPage";
 
 import Example2 from "./pages/Example2";
-import Example4 from "./pages/Example4";
 
 const router = createBrowserRouter([
   {
@@ -21,7 +20,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: "", element: <Home /> },
-      { path: "Infinite", element: <Example4 /> },
+      // { path: "Infinite", element: <Example2 /> },
       { path: "videos/:keyword", element: <SearchPage /> },
       { path: "videos/watch/:videoId", element: <VideoDetail /> },
     ],

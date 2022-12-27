@@ -33,7 +33,6 @@ function SearchPage({}) {
   } = useQuery(["videos", keyword], () =>
     // .then((res) => res.data.items.map((item) => ({ ...item, id: item.id.videoId }))
     youtube.searchByKeyword(keyword).then((videos) => {
-      // setSearchQ(keyword);
       setNextPageTok(videos.nextPageToken);
       setLists(videos.items);
     })

@@ -10,6 +10,7 @@ function VideoCard({ video, type, list }) {
     <li
       onClick={() => {
         navigate(`/videos/watch/${video.id}`, { state: { video: video } }); // 두번재 인자는 부가적인 객체
+        window.location.reload();
       }}
     >
       <img

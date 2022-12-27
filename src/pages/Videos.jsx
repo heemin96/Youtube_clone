@@ -26,7 +26,7 @@ function Videos({}) {
 
   useEffect(() => {
     youtube.mostPopular(category).then((data) => {
-      setCategory(data.snippet.categoryId);
+      setCategory(data.videoCategoryId);
       setChangeVideos(data.items);
       setNextPageTok(data.nextPageToken);
     });
@@ -58,7 +58,7 @@ function Videos({}) {
       setTimeout(() => {
         setPage((prevState) => prevState + 1);
         setIsLoading(0);
-      }, 1000);
+      }, 1);
     }
   }, [inView]);
 
@@ -71,6 +71,7 @@ function Videos({}) {
           setCategory={setCategory}
           onSelect={onSelect}
         />
+
         <GridContainer>
           {changeVideos.map((video) => (
             <VideoCard
