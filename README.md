@@ -6,8 +6,9 @@
 <p align="center">
   <br>
 <!-- <img src="https://user-images.githubusercontent.com/101728625/206084906-0b496764-6bf1-4976-a873-a1fd22630277.png"/> -->
-<img src= "https://user-images.githubusercontent.com/101728625/209488378-3565438f-fa9d-4a81-b69d-5ec9df9ac763.png"/>
-  
+<img src="https://user-images.githubusercontent.com/101728625/211124052-92c42d80-da62-49c4-b102-a94687d27e20.png"/>
+
+
   <br>
 </p>
 
@@ -48,7 +49,7 @@
 
 ### 기능 1
 
-- Grid를 통한 반응형 웹페이지
+- flex, Grid를 통한 반응형 웹페이지
 <img src ="https://user-images.githubusercontent.com/101728625/211121612-33cae41a-f471-4201-afcf-9918d407796a.gif"/>
 <br/>
 
