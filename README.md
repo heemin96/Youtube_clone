@@ -46,8 +46,6 @@
 ## 구현 기능
 
 
- 
-  
 ### 기능 1
 
 - Grid를 통한 반응형 웹페이지
@@ -70,9 +68,15 @@
 
 ### 기능 3
 - React-Router-Dom 을 통해 페이지 이동,검색하기 
+<img src ="https://user-images.githubusercontent.com/101728625/211122144-3086c96f-2de1-4451-9407-ac83ff0dc25b.gif"/>
+<br/>
+
+
 
 ### 기능 4
 - Infinite scrolling 
+- <img src ="https://user-images.githubusercontent.com/101728625/211122568-92e6aca4-8411-4fdb-9729-25018d9d2921.gif"/>
+<br/>
 
 ### 기능 5
 
