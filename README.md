@@ -65,6 +65,7 @@
 ### 기능 2
 - React Query를 통해 데이터 관리하기
 - React Axios 를 통해 데이터 통신하기
+<br/>
 
 ### 기능 3
 - React-Router-Dom 을 통해 페이지 이동,검색하기 
@@ -75,31 +76,31 @@
 
 ### 기능 4
 - Infinite scrolling 
-- <img src ="https://user-images.githubusercontent.com/101728625/211122568-92e6aca4-8411-4fdb-9729-25018d9d2921.gif"/>
+<img src ="https://user-images.githubusercontent.com/101728625/211122568-92e6aca4-8411-4fdb-9729-25018d9d2921.gif"/>
 <br/>
 
 ### 기능 5
 
 - 실제 Api, 목데이터 나눠서 필요할때만  api 사용하기   
 
-
-
-<br>
+<br/>
 
 ## 느낀점
 
 - 좋았던 점
 <p align="justify">
   
-1. 
+1. css, 반응형 작업이 전 보다 수월해짐
+2. axios, query 작업으로 데이터 통신,관리 수월해짐
+3. observer 객체 생성해서 infinite scrolling 작업경험 
 </p>
-
 
 
 - 개선하고 싶은 점
 <p align="justify">
   
-1.
+1. 데이터 통신이 뭔가 부드럽지 않아 보임 -> loading 처리로 해결 가능 해보임
+2. firebase를 통한 로그인, 구독, 쇼츠 등 넣고 싶은 기능들이 있음.
 
 
 
