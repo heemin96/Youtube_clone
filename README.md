@@ -49,9 +49,20 @@
  
   
 ### 기능 1
+
 - Grid를 통한 반응형 웹페이지
+<img src ="https://user-images.githubusercontent.com/101728625/211121612-33cae41a-f471-4201-afcf-9918d407796a.gif"/>
+<br/>
+
 - side bar  
+<img src = "https://user-images.githubusercontent.com/101728625/211121650-3d4c4d43-66ec-438d-90d3-f86bdc359b99.gif"/>
+<br/>
+
 - 카테고리 기능 추가 
+<img src ="https://user-images.githubusercontent.com/101728625/211121690-1a5f0e4f-7915-4b9b-82ae-db788bb76c7c.gif"/>
+<br/>
+
+
 
 ### 기능 2
 - React Query를 통해 데이터 관리하기
